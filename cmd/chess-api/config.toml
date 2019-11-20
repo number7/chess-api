@@ -1,0 +1,6 @@
+api-name = "chess-api"
+
+[server-config]
+rest-host = "localhost"
+rest-port = 1066
+

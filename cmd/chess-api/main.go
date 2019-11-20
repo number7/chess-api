@@ -1,23 +1,35 @@
 package main
 
 import (
-    "fmt"
-    "github.com/go-chi/chi"
-    rest "gkwkr/chess-api/cmd/chess-api/handlers"
-    "net/http"
+	"fmt"
+	"net/http"
+	"os"
+
+	"github.com/go-chi/chi"
+	"github.com/sirupsen/logrus"
+
+	"gkwkr/chess-api/cmd/chess-api/config"
+	rest "gkwkr/chess-api/cmd/chess-api/handlers"
 )
 
 func main() {
-    host := "localhost"  // put in a config
-    port := "1066"       // put in a config
-    address := fmt.Sprintf("%v:%v", host, port)
+	if len(os.Args) != 2 {
+		logrus.Fatalln("you must provide a single argument representing the config file.")
+	}
+	appConfig, err := config.ParseConfig(os.Args[1])
+	if err != nil {
+		panic(fmt.Sprintf("Error: Failed to parse the config file. Error returned: \n%v", err))
+	}
 
-    restHandler := rest.Handler{}
+	address := fmt.Sprintf("%v:%v", appConfig.RestServer.Host, appConfig.RestServer.Port)
 
-    router := chi.NewRouter()
-    router.Route(rest.ResourcePath, restHandler.Routes)
-    err := http.ListenAndServe(address, router)
-    if err != nil {
-        fmt.Printf("error serving HTTP site:\n%v", err)
-    }
+	restHandler := rest.Handler{}
+
+	router := chi.NewRouter()
+	router.Route(rest.ResourcePath, restHandler.Routes)
+
+	err = http.ListenAndServe(address, router)
+	if err != nil {
+		fmt.Printf("error serving HTTP site:\n%v", err)
+	}
 }
