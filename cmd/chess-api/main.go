@@ -6,10 +6,11 @@ import (
 	"os"
 
 	"github.com/go-chi/chi"
+	"github.com/number7/chess-api/cmd/chess-api/config"
+	"github.com/number7/chess-api/cmd/chess-api/data-layer"
+	rest "github.com/number7/chess-api/cmd/chess-api/handler-layer"
+	"github.com/number7/chess-api/cmd/chess-api/service-layer"
 	"github.com/sirupsen/logrus"
-
-	"gkwkr/chess-api/cmd/chess-api/config"
-	rest "gkwkr/chess-api/cmd/chess-api/handlers"
 )
 
 func main() {
@@ -23,11 +24,14 @@ func main() {
 
 	address := fmt.Sprintf("%v:%v", appConfig.RestServer.Host, appConfig.RestServer.Port)
 
-	restHandler := rest.Handler{}
+	chessRepo := data.NewRepo()
+	svc := service.NewChessService(chessRepo)
+	restHandler := rest.NewRestHandler(svc)
 
 	router := chi.NewRouter()
 	router.Route(rest.ResourcePath, restHandler.Routes)
 
+	fmt.Print("Serving up chess games, dude...")
 	err = http.ListenAndServe(address, router)
 	if err != nil {
 		fmt.Printf("error serving HTTP site:\n%v", err)
