@@ -3,7 +3,7 @@ package config
 import "github.com/BurntSushi/toml"
 
 type AppConfig struct {
-	ApiName    string       `toml:"api-name"`
+	APIName    string       `toml:"api-name"`
 	RestServer ServerConfig `toml:"server-config"`
 }
 
