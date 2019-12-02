@@ -1,6 +1,6 @@
 ## chess-api
 
-This API will allow a person to download games in standard chess notation format (whatever that is; gotta look it up).
+This API will allow a person to download games in the standard PGN chess notation format.
 
 It will have a browsing ability and a search capability by using search keys.
 
