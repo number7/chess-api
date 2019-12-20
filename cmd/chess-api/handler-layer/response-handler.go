@@ -23,7 +23,7 @@ func Respond(writer http.ResponseWriter, request *http.Request, response interfa
 		return
 	}
 
-	b, err := json.Marshal(response)
+	respBytes, err := json.Marshal(response)
 	if err != nil {
 		http.Error(writer, err.Error(), http.StatusInternalServerError)
 		return
@@ -34,5 +34,5 @@ func Respond(writer http.ResponseWriter, request *http.Request, response interfa
 		writer.WriteHeader(status)
 	}
 
-	writer.Write(b)
+	writer.Write(respBytes)
 }

@@ -1,6 +1,7 @@
 create table players (
     last_name  varchar(100) not null,
     first_name varchar(100) not null,
+    country    varchar(100) null,
     primary key ( last_name, first_name )
 );
 

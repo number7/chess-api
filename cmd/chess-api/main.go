@@ -31,7 +31,8 @@ func main() {
 	router := chi.NewRouter()
 	router.Route(rest.ResourcePath, restHandler.Routes)
 
-	fmt.Print("Serving up chess games, dude...")
+	fmt.Print("Serving up chess games, dude...\n")
+	fmt.Printf("on http://%v:%v\n", appConfig.RestServer.Host, appConfig.RestServer.Port)
 	err = http.ListenAndServe(address, router)
 	if err != nil {
 		fmt.Printf("error serving HTTP site:\n%v", err)
