@@ -11,6 +11,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+//go:generate counterfeiter . GetRepo
+
 func TestGet(t *testing.T) {
 	t.Run("returns and error when repo returns an error", func(t *testing.T) {
 		fakeRepo := new(servicelayerfakes.FakeGetRepo)

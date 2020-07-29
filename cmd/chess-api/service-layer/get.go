@@ -5,7 +5,6 @@ import (
 	"github.com/number7/chess-api/cmd/chess-api/service-layer/structs"
 )
 
-//go:generate counterfeiter . GetRepo
 type GetRepo interface {
 	Get(string) (data.GameData, error)
 }
