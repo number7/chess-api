@@ -4,3 +4,9 @@ api-name = "chess-api"
 rest-host = "localhost"
 rest-port = 1066
 
+[db-config]
+db-host = "localhost"
+db-port = 5432
+db-name = "chess"
+db-username = "rock"
+db-password = "rock"

@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v4"
 	"github.com/number7/chess-api/cmd/chess-api/handler-layer/structs"
 )
 
