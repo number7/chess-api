@@ -38,7 +38,6 @@ func main() {
 		panic(err)
 	}
 	defer conn.Close(ctx)
-
 }
 
 func parseFlags(cfg *appConfig) {
@@ -75,7 +74,7 @@ func mustValidateFlags(cfg appConfig) {
 	}
 
 	if len(badParms) > 0 {
-		fmt.Printf("These flags were not passed in: %s\n\n", strings.Join(badParms, ", "))
+		fmt.Printf("These required flags were not passed in: %s\n\n", strings.Join(badParms, ", "))
 		flag.Usage()
 		os.Exit(1)
 	}
